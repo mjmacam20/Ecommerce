@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +29,16 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {
+    // Admin Login Route without admin group
+    Route::match(['get','post'], 'login','AdminController@login');
+    Route::group(['middleware'=>['admin']],function(){
+        // Admin Dashboard Route without admin group
+    Route::get('dashboard','AdminController@dashboard');
+
+    // Admin Logout
+    Route::get('logout','AdminController@logout');
+    });
+});
+
