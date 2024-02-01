@@ -5,7 +5,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>Wavepad Admin</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ url('admin/vendors/feather/feather.css') }}">
   <link rel="stylesheet" href="{{ url('admin/vendors/ti-icons/css/themify-icons.css') }}">
@@ -59,6 +60,7 @@
   <script src="{{ url('admin/js/dashboard.js') }}"></script>
   <script src="{{ url('admin/js/Chart.roundedBarCharts.js') }}"></script>
   <!-- End custom js for this page-->
+  <script src="{{url ('admin/js/custom.js') }}"></script>
 </body>
 
 </html>
