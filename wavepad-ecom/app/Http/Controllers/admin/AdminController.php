@@ -136,7 +136,8 @@ class AdminController extends Controller
                     return redirect()->back()->with('success_message','Vendor details updated successfully!');
         }
             $vendorDetails = Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
-        }else if($slug=="business"){
+        }
+        else if($slug=="business"){
             if($request->isMethod('post')){
                 $data = $request->all();
                 
@@ -180,7 +181,8 @@ class AdminController extends Controller
                     return redirect()->back()->with('success_message','Vendor details updated successfully!');
         }
             $vendorDetails = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
-        }else if($slug=="bank"){
+        }
+        else if($slug=="bank"){
             if($request->isMethod('post')){
                 $data = $request->all();
                 
@@ -205,10 +207,10 @@ class AdminController extends Controller
                     //update in vendors_business_details table
                     VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(['account_holder_name'=>$data['account_holder_name'],'bank_name'=>$data['bank_name'],'account_number'=>$data['account_number'],'bank_ifsc_code'=>$data['bank_ifsc_code']]);
                     return redirect()->back()->with('success_message','Vendor details updated successfully!');
-        }
+                }
                 $vendorDetails = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray(); 
-                return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
         }
+        return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
     }
 
     public function login(Request $request){
@@ -236,6 +238,18 @@ class AdminController extends Controller
             }
         }
         return view("admin.login");
+    }
+    public function admins($type=null){
+        $admins = Admin::query();
+        if(!empty($type)){
+            $admins = $admins->where('type',$type);   
+            $title = ucfirst($type)."s";
+        }else{
+            $title = "All Admin/Subadmin/Vendors";       
+        }
+            
+        $admins = $admins->get()->toArray();
+        return view('admin.admins.admins')->with(compact('admins','title'));
     }
 
     public function logout(){
