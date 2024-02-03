@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin;
 use App\Models\Vendor;
 use App\Models\VendorsBusinessDetail;
+use App\Models\VendorsBankDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -180,9 +181,34 @@ class AdminController extends Controller
         }
             $vendorDetails = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
         }else if($slug=="bank"){
-
+            if($request->isMethod('post')){
+                $data = $request->all();
+                
+                    $rules = [
+                        'account_holder_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                        'bank_name' => 'required',
+                        'account_number' => 'required|numeric',
+                        'bank_ifsc_code'=> 'required',
+                    ];
+        
+                    $customMessages = [
+                        'account_holder_name.required' => 'Account holder name is required',
+                        'account_holder_name.regex' => 'Account holder name is required',
+                        'bank_name.required' => 'Bank name is required',
+                        'account_number.required' => 'Account Number is required',
+                        'account_number.numeric' => 'Valid Account Number is required',
+                        'bank_ifsc_code.required' => 'Bank Code is required',
+                    ];
+    
+                    $this->validate($request,$rules,$customMessages);
+    
+                    //update in vendors_business_details table
+                    VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(['account_holder_name'=>$data['account_holder_name'],'bank_name'=>$data['bank_name'],'account_number'=>$data['account_number'],'bank_ifsc_code'=>$data['bank_ifsc_code']]);
+                    return redirect()->back()->with('success_message','Vendor details updated successfully!');
         }
-        return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
+                $vendorDetails = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray(); 
+                return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
+        }
     }
 
     public function login(Request $request){
