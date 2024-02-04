@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Admin;
 use App\Models\Vendor;
+use App\Models\Country;
 use App\Models\VendorsBusinessDetail;
 use App\Models\VendorsBankDetail;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Hash;
 use Auth;
+use Session;
 
 class AdminController extends Controller
 {
@@ -18,6 +20,7 @@ class AdminController extends Controller
     }
 
     public function updateAdminPassword(Request $request){
+
         if($request->isMethod("post")){
             $data = $request->all();
 
@@ -210,7 +213,8 @@ class AdminController extends Controller
                 }
                 $vendorDetails = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray(); 
         }
-        return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
+        $countries = Country::where('status',1)->get()->toArray();
+        return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails','countries'));
     }
 
     public function login(Request $request){
@@ -252,6 +256,27 @@ class AdminController extends Controller
         return view('admin.admins.admins')->with(compact('admins','title'));
     }
 
+    public function viewVendorDetails($id){
+        $vendorDetails = Admin::with('vendorPersonal','vendorBusiness','vendorBank')->where('id',$id)->first();
+        $vendorDetails = json_decode(json_encode($vendorDetails),true);
+        /*dd($vendorDetails);*/
+        return view('admin.admins.view_vendor_details')->with(compact('vendorDetails'));
+    }
+
+    public function updateAdminStatus(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            
+            /*echo"<pre>"; print_r($data); die;*/
+            if($data['status']=="Active"){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            Admin::where('id',$data['admin_id'])->update(['status'=>$status]);
+            return response()->json(['status'=> $status,'admin_id'=>$data['admin_id']]);
+        }
+    }
     public function logout(){
         Auth::guard('admin')->logout();
         return redirect('admin/login');

@@ -84,7 +84,14 @@
                       </div>
                       <div class="form-group">
                         <label for="vendor_country">Country</label>
-                        <input type="text" class="form-control" id="vendor_country" placeholder="Country" name="vendor_country" value="{{ $vendorDetails['country'] }}" required="">
+                        <select class="form-control" id="vendor_country" name="vendor_country" style="color: #495057">
+                            <option value="">Select Country</option>
+                            @foreach($countries as $country)
+                              <option value="{{ $country['country_name'] }}"@if($country['country_name']==$vendorDetails['country']) selected @endif>
+                              {{ $country['country_name'] }}</option>
+                            @endforeach
+                        </select>
+
                       </div>
                       <div class="form-group">
                         <label for="vendor_zipcode">Zipcode</label>
@@ -166,7 +173,14 @@
                       </div>
                       <div class="form-group">
                         <label for="shop_country">Shop Country</label>
-                        <input type="text" class="form-control" id="shop_country" placeholder="Shop Country" name="shop_country" value="{{ $vendorDetails['shop_country'] }}" required="">
+                        <select class="form-control" id="shop_country" name="shop_country" style="color: #495057">
+                            <option value="">Select Country</option>
+                            @foreach($countries as $country)
+                              <option value="{{ $country['country_name'] }}"@if($country['country_name']==$vendorDetails['shop_country']) selected @endif>
+                              {{ $country['country_name'] }}</option>
+                            @endforeach
+                        </select>
+
                       </div>
                       <div class="form-group">
                         <label for="shop_zipcode">Shop Zipcode</label>
