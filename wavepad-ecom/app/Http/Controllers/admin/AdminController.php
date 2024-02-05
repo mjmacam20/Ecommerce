@@ -16,6 +16,7 @@ use Session;
 class AdminController extends Controller
 {
     public function dashboard(){
+        Session::put('page','sections');
         return view("admin.dashboard");
     }
 

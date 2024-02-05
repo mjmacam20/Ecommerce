@@ -22,7 +22,10 @@
   <link rel="stylesheet" href="{{ url('admin/css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ url('admin/images/favicon.png') }}" />
-
+  <!-- datatable -->
+  <link rel="stylesheet" href="{{ url('admin/css/select.bootstrap5.min.css') }}">
+  <link rel="stylesheet" href="{{ url('admin/css/dataTables.bootstrap5.min.css') }}">
+  <link rel="stylesheet" href="{{ url('admin/css/bootstrap.min.css') }}">
 </head>
 <body>
   <div class="container-scroller">
@@ -62,9 +65,16 @@
   <script src="{{ url('admin/js/dashboard.js') }}"></script>
   <script src="{{ url('admin/js/Chart.roundedBarCharts.js') }}"></script>
   <!-- End custom js for this page-->
-  <script src="{{url ('admin/js/custom.js') }}"></script>
-  
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://code.jquery.com/dataTables.select.min.js"></script>
+  <script src="https://code.jquery.com/dataTables.bootstrap5.min.js"></script>
+  <script src="https://code.jquery.com/jquery.dataTables.min.js"></script>
+
   <script type="text/javascript" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+  <script src="{{url ('admin/js/custom.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
