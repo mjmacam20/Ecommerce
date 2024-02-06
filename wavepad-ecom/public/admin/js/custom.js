@@ -1,4 +1,5 @@
 $(document).ready(function(){;
+  
     $(".nav-item").removeClass("active");
     $(".nav-link").removeClass("active");
 	$("#current_password").keyup(function(){
@@ -46,7 +47,7 @@ $(document).ready(function(){;
             }
         })
     });
-
+    // update Section Status
     $(document).on('click','.updateSectionStatus',function(){
         var status = $(this).children("i").attr("status");
         var section_id = $(this).attr("section_id");
@@ -63,6 +64,30 @@ $(document).ready(function(){;
                     $("#section-"+section_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
                 }else if(resp['status']==1){
                     $("#section-"+section_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },error: function(){
+                alert("Error");
+            }
+        })
+    });
+
+    // update Category Status
+    $(document).on('click','.updateCategoryStatus',function(){
+        var status = $(this).children("i").attr("status");
+        var category_id = $(this).attr("category_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'post',
+            url:'/admin/update-category-status',
+            data:{status:status,category_id:category_id},
+            success: function(resp){
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#category-"+category_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#category-"+category_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
                 }
             },error: function(){
                 alert("Error");
@@ -91,8 +116,26 @@ $(document).ready(function(){;
               });
               window.location = "/admin/delete-"+module+"/"+moduleid;
             }
-          });
+        });
     });
-    
-    $('#sections').DataTable()
+
+    //Append Categories Level
+    $("#section_id").change(function(){
+        var section_id = $(this).val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'get',
+            url:'/admin/append-categories-level',
+            data:{section_id:section_id},
+            success:function(resp){
+                $("#appendCategoriesLevel").html(resp);
+            },error:function(){
+                alert("Error");
+            }
+        })
+    });
+    //$('#sections').DataTable()
+    //$('#categories').DataTable()
 });
