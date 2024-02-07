@@ -71,7 +71,7 @@ $(document).ready(function(){;
         })
     });
 
-    // update Category Status
+    // Update Category Status
     $(document).on('click','.updateCategoryStatus',function(){
         var status = $(this).children("i").attr("status");
         var category_id = $(this).attr("category_id");
@@ -88,6 +88,54 @@ $(document).ready(function(){;
                     $("#category-"+category_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
                 }else if(resp['status']==1){
                     $("#category-"+category_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },error: function(){
+                alert("Error");
+            }
+        })
+    });
+
+    // Update Author Status
+    $(document).on('click','.updateAuthorStatus',function(){
+        var status = $(this).children("i").attr("status");
+        var author_id = $(this).attr("author_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'post',
+            url:'/admin/update-author-status',
+            data:{status:status,author_id:author_id},
+            success: function(resp){
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#author-"+author_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#author-"+author_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },error: function(){
+                alert("Error");
+            }
+        })
+    });
+
+    //Update Product Status
+    $(document).on('click','.updateProductStatus',function(){
+        var status = $(this).children("i").attr("status");
+        var product_id = $(this).attr("product_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'post',
+            url:'/admin/update-product-status',
+            data:{status:status,product_id:product_id},
+            success: function(resp){
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#product-"+product_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#product-"+product_id).html("<i style='font-size:25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
                 }
             },error: function(){
                 alert("Error");
@@ -136,6 +184,8 @@ $(document).ready(function(){;
             }
         })
     });
-    //$('#sections').DataTable()
-    //$('#categories').DataTable()
+    //$('#sections').DataTable();
+    //$('#categories').DataTable();
+    //$('#authors').DataTable();
+    //$('#products').DataTable();
 });

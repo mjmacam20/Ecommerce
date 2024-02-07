@@ -61,7 +61,8 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ url('admin/sections') }}">Sections</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ url('admin/categories') }}">Categories</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('admin/subcribers') }}">Products</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('admin/authors') }}">Authors</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('admin/products') }}">Products</a></li>
                 </ul>
             </div>
         </li>
