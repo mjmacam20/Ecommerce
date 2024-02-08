@@ -205,4 +205,14 @@ class ProductsController extends Controller
         $message = 'Product Video has been deleted successfully!';
         return redirect()->back()->with('success_messsage',$message);
     }
+
+    public function addAttributes(Request $request, $id){
+        $product = Product::find($id);
+        /*dd($product);*/
+        if($request->isMethod('post')){
+            $data = $request->all();
+            echo "<pre>"; print_r($data); die;
+        }
+        return view('admin.attributes.add_edit_attributes')->with(compact('product'));
+    }
 }
