@@ -63,7 +63,7 @@
                     <form class="forms-sample" @if(empty($section['id'])) action="{{url('admin/add-edit-section') }}" @else {{url('admin/add-edit-section/'.$section['id']) }} @endif method="post" enctype="multipart/form-data">@csrf
                       <div class="form-group">
                         <label for="section_name">Section Name</label>
-                        <input type="text" class="form-control" id="section_name" placeholder="Section" name="section_name" @if(!empty($section['name'])) value="{{ $section['name'] }}" @else value="{{ old('section_name') }}" @endif>
+                        <input type="text" class="form-control" id="section_name" placeholder="Enter Section Name" name="section_name" @if(!empty($section['name'])) value="{{ $section['name'] }}" @else value="{{ old('section_name') }}" @endif>
                       </div>
                       <button type="submit" class="btn btn-primary mr-2">Submit</button>
                       <button class="btn btn-dark">Cancel</button>

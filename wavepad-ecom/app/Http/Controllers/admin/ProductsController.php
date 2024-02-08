@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Section;
@@ -71,6 +72,44 @@ class ProductsController extends Controller
             ];
 
             $this->validate($request,$rules,$customMessages);
+
+            //Upload Product Image after Resize Small: 250x250 Medium: 500x500 Large 1000x1000
+
+            if($request->hasFile('product_image')){
+                $image_tmp = $request->file('product_image');
+                if($image_tmp->isValid()){
+                    // Updload Image after Resize 
+                    // Get image extension
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    // Generate new image
+                    $imageName = rand(111,99999).'.'.$extension;
+                    $largeImagePath = 'front/images/product_images/large/'.$imageName;
+                    $mediumImagePath = 'front/images/product_images/medium/'.$imageName;
+                    $smallImagePath = 'front/images/product_images/small/'.$imageName;
+                    //upload the large, Medium and Small Images after resize
+
+                    Image::make($image_tmp)->resize(1000,1000)->save($largeImagePath);
+                    Image::make($image_tmp)->resize(500,500)->save($mediumImagePath);
+                    Image::make($image_tmp)->resize(250,250)->save($smallImagePath);
+                    // Insert Image Name in products table
+                    $product->product_image = $imageName;
+                }
+            }
+
+            //Upload Product Video
+            if($request->hasFile('product_video')){
+                $video_tmp = $request->file('product_video');
+                if($video_tmp->isValid()){
+                    // Upload video in videos folder 
+                    $extension = $video_tmp->getClientOriginalExtension();
+                    $videoName =  rand(111,99999).'.'.$extension;
+                    $videoPath = 'front/videos/product_videos/';
+                    $video_tmp->move($videoPath,$videoName);
+                    // Insert video name in products table
+                    $product->product_video = $videoName;
+                }
+            }
+
             //Save Product details in products table
                 $categoryDetails = Category::find($data['category_id']);
                 $product->section_id = $categoryDetails['section_id'];

@@ -63,7 +63,7 @@
                     <form class="forms-sample" @if(empty($author['id'])) action="{{url('admin/add-edit-author') }}" @else {{url('admin/add-edit-author/'.$author['id']) }} @endif method="post" enctype="multipart/form-data">@csrf
                       <div class="form-group">
                         <label for="author_name">Author Name</label>
-                        <input type="text" class="form-control" id="author_name" placeholder="Author Name" name="author_name" @if(!empty($author['name'])) value="{{ $author['name'] }}" @else value="{{ old('author_name') }}" @endif>
+                        <input type="text" class="form-control" id="author_name" placeholder="Enter Author Name" name="author_name" @if(!empty($author['name'])) value="{{ $author['name'] }}" @else value="{{ old('author_name') }}" @endif>
                       </div>
                       <button type="submit" class="btn btn-primary mr-2">Submit</button>
                       <button class="btn btn-dark">Cancel</button>
