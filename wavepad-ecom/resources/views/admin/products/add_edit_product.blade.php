@@ -63,14 +63,14 @@
                     <form class="forms-sample" @if(empty($product['id'])) action="{{url('admin/add-edit-product') }}" @else {{url('admin/add-edit-product/'.$product['id']) }} @endif method="post" enctype="multipart/form-data">@csrf
                     <div class="form-group">
                         <label for="category_id">Select Category</label>
-                        <select name="category_id" id="category_id" class="form-control" style="color: #000;">
+                        <select name="category_id" id="category_id" class="form-control text-dark">
                           <option value="">Select</option>  
                           @foreach($categories as $section)
                           <optgroup label="{{ $section['name'] }} "></optgroup>
                                 @foreach($section['categories'] as $category)
-                                    <option value="{{ $category['id'] }}">&nbsp;&nbsp;&nbsp;-&nbsp;{{ $category['category_name'] }}</option>
+                                    <option @if(!empty($product['category_id']==$category['id'])) selected="" @endif value="{{ $category['id'] }}">&nbsp;&nbsp;&nbsp;-&nbsp;{{ $category['category_name'] }}</option>
                                     @foreach($category['subcategories'] as $subcategory)
-                                    <option value="{{ $subcategory['id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;{{ $subcategory['category_name'] }}</option>
+                                    <option  @if(!empty($product['category_id']==$subcategory['id'])) selected="" @endif  value="{{ $subcategory['id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;{{ $subcategory['category_name'] }}</option>
                                     @endforeach
                                 @endforeach
                           @endforeach
@@ -78,10 +78,10 @@
                       </div>
                       <div class="form-group">
                         <label for="author_id">Select Author</label>
-                        <select name="author_id" id="author_id" class="form-control" style="color: #000;">
+                        <select name="author_id" id="author_id" class="form-control text-dark">
                           <option value="">Select</option>  
                           @foreach($authors as $author)
-                                <option value="{{ $author['id'] }}">{{ $author['name'] }}</option>
+                                <option value="{{ $author['id'] }}"  @if(!empty($product['author_id']==$author['id'])) selected="" @endif >{{ $author['name'] }}</option>
                           @endforeach
                         </select>
                       </div>
@@ -115,7 +115,7 @@
                         <label for="product_image">Product Image (Recommend Size: 1000x1000)</label>
                         <input type="file" class="form-control" id="product_image" name="product_image">    
                         @if(!empty($product['product_image']))
-                        <a target="_blank" href="{{ url('front/images/product_images/'.$product['product_image']) }}">View Image</a>&nbsp;|&nbsp;
+                        <a target="_blank" href="{{ url('front/images/product_images/large/'.$product['product_image']) }}">View Image</a>&nbsp;|&nbsp;
                         <a href="javascript:void(0)" class="confirmDelete" module="product-image" moduleid="{{ $product['id'] }}">Delete Image</a>
                         @endif
                       </div>
@@ -129,7 +129,7 @@
                       </div>
                       <div class="form-group">
                         <label for="product_discount">Product Description</label>
-                        <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+                        <textarea name="description" id="description" class="form-control" rows="3">{{ $product['description'] }}</textarea>
                       </div>
                       <div class="form-group">
                         <label for="meta_title">Meta Title</label>
