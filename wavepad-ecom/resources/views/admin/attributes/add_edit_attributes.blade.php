@@ -89,7 +89,7 @@
                         <div class="field_wrapper">
                           <div>
                               <input type="text" name="size[]" placeholder="Set" style="width: 120px;" required=""/>
-                              <input type="text" name="sku[]" placeholder="SKU" style="width: 120px;" required=""/>
+                              <input type="text" name="sku[]" placeholder="Product Code" style="width: 120px;" required=""/><!-- This is SKU I change it into Product Code -->
                               <input type="text" name="price[]" placeholder="Price" style="width: 120px;" required=""/>
                               <input type="text" name="stock[]" placeholder="Stock" style="width: 120px;" required=""/>
                               <a href="javascript:void(0);" class="add_button" title="Add Attributes">Add</a>
@@ -99,9 +99,67 @@
                       <button type="submit" class="btn btn-primary mr-2">Submit</button>
                       <button class="btn btn-dark">Cancel</button>
                     </form>
+                    <br><br><h4 class="card-title">Added Attributes</h4>
+                    <form method="post" action="{{ url('admin/edit-attributes/'.$product['id']) }}">@csrf
+                    <table id="products" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            Set
+                                        </th>
+                                        <th>
+                                            Product Code <!-- This is SKU I change it into Product Code -->
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Stock
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($product['attributes'] as $attribute)
+                                    <input style="display: none;" type="text" name="attributeId[]" value="{{ $attribute['id'] }}">
+                                    <tr>
+                                        <td>
+                                            {{ $attribute['id'] }}
+                                        </td>
+                                        <td>
+                                            {{ $attribute['size'] }}
+                                        </td>
+                                        <td>
+                                            {{ $attribute['sku'] }}
+                                        </td>   
+                                        <td>
+                                            <input type="number" name="price[]" value="{{ $attribute['price'] }}" required="" style="width: 70px;">
+                                        </td>
+                                        <td>
+                                            <input type="number" name="stock[]" value="{{ $attribute['stock'] }}" required="" style="width: 70px;">
+                                        </td>
+                                        <td>
+                                            @if($attribute['status']==1)
+                                                <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id=" {{ $attribute['id'] }}" href="javascript:void(0)"><i style='font-size: 21px;'class="mdi mdi-checkbox-multiple-marked" status="Active"></i></a>
+                                            @else
+                                            <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id=" {{ $attribute['id'] }}" href="javascript:void(0)"><i style='font-size: 21px;'class="mdi mdi-checkbox-multiple-blank-outline" status="Inactive"></i></a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>    
+                            <button type="submit" class="btn btn-primary">Update Attribute</button>
+                      </form>             
                   </div>
                 </div>
-              </div>
+              </div>     
+          </div>        
     </div>
     <!-- content-wrapper ends -->
     <!-- partial:partials/_footer.html -->

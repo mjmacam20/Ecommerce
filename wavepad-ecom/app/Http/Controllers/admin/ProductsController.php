@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductsAttribute;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -207,12 +208,66 @@ class ProductsController extends Controller
     }
 
     public function addAttributes(Request $request, $id){
-        $product = Product::find($id);
-        /*dd($product);*/
+        $product = Product::select('id','product_name','product_code','product_color','product_price','product_image')->with('attributes')->find($id);
+        /*$product = json_decode(json_encode($product),true);
+        dd($product);*/
         if($request->isMethod('post')){
             $data = $request->all();
-            echo "<pre>"; print_r($data); die;
+             /*echo "<pre>"; print_r($data); die;*/
+
+            foreach ($data['sku'] as $key => $value){
+                if(!empty($value)){
+
+                    //Sku or product code duplicate check
+                    $skuCount = ProductsAttribute::where('sku',$value)->count();
+                    if($skuCount>0){
+                        return redirect()->back()->with('error_message','Product Code already exists! Please add another Product Code!');
+                    }
+                    //set duplication check
+                    $sizeCount = ProductsAttribute::where(['product_id'=>$id],'size',$data['size'][$key])->count();
+                    if($sizeCount>0){
+                        return redirect()->back()->with('error_message','Set already exists! Please add another Set!');
+                    }
+
+                    $attribute = new ProductsAttribute;
+                    $attribute->product_id = $id;
+                    $attribute->sku = $value;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->status = 1;
+                    $attribute->save();
+                }
+            }
+            return redirect()->back()->with('success_message','Product Attribute has been added successfully!');
         }
         return view('admin.attributes.add_edit_attributes')->with(compact('product'));
     }
+    public function updateAttributeStatus(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            
+            /*echo"<pre>"; print_r($data); die;*/
+            if($data['status']=="Active"){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            ProductsAttribute::where('id',$data['attribute_id'])->update(['status'=>$status]);
+            return response()->json(['status'=> $status,'attribute_id'=>$data['attribute_id']]);
+        }
+    }
+    public function editAttributes(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            /*echo "<pre>"; print_r($data); die;*/
+            foreach($data['attributeId'] as $key => $attribute){
+                if(!empty($attribute)){
+                    ProductsAttribute::where(['id'=>$data['attributeId'][$key]])->update(['price'=>$data['price'][$key],'stock'=>$data['stock'][$key]]);
+                }
+            }
+            return redirect()->back()->with('success_message','Product Attribute has been updated successfully!');
+        }
+    }
+
 }
