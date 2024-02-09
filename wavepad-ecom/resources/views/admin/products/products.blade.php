@@ -95,10 +95,11 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ url('admin/add-edit-product/'.$product['id']) }}"><i style='font-size: 20px;'class="mdi mdi-file-document-box"></i></a>
-                                            <a href="{{ url('admin/add-edit-attributes/'.$product['id']) }}"><i style='font-size: 20px;'class="mdi mdi-plus-box"></i></a>
+                                            <a title="Add/Edit Products" href="{{ url('admin/add-edit-product/'.$product['id']) }}"><i style='font-size: 20px;'class="mdi mdi-file-document-box"></i></a>
+                                            <a title="Add Attributes" href="{{ url('admin/add-edit-attributes/'.$product['id']) }}"><i style='font-size: 20px;'class="mdi mdi-plus-box"></i></a>
+                                            <a title="Add Images" href="{{ url('admin/add-images/'.$product['id']) }}"><i style='font-size: 20px;'class="mdi mdi-image"></i></a>
                                             <?php /*<a title="product" class="confirmDelete" href="{{ url('admin/delete-product/'.$product['id']) }}"><i style='font-size: 25px;'class="mdi mdi-delete-forever"></i></a> */?>
-                                            <a href="javascript:void(0)" class="confirmDelete" module="product" moduleid="{{ $product['id'] }}"><i style='font-size: 22px;'class="mdi mdi-delete-forever"></i></a>
+                                            <a title="Delete" href="javascript:void(0)" class="confirmDelete" module="product" moduleid="{{ $product['id'] }}"><i style='font-size: 22px;'class="mdi mdi-delete-forever"></i></a>
 
                                         </td>
                                     </tr>
