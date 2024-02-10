@@ -54,7 +54,6 @@ class ProductsController extends Controller
             $product = Product::find($id);
             /*dd($product);*/
             $message = "Product updated successfully!";
-
         }
 
         if($request->isMethod('post')){
@@ -132,6 +131,14 @@ class ProductsController extends Controller
                     $product->vendor_id = $vendor_id;
                 }else{
                     $product->vendor_id = 0;
+                }
+
+                if(empty($data['product_discount'])){
+                    $data['product_discount'] = 0;
+                }
+
+                if(empty($data['product_weight'])){
+                    $data['product_weight'] = 0;
                 }
 
                 $product->product_name = $data['product_name'];
