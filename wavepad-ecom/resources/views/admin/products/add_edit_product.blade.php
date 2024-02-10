@@ -150,6 +150,10 @@
                         <label for="is_featured">Featured Items</label>
                         <input type="checkbox" name="is_featured" id="is_featured" value="Yes" @if(!empty($product['is_featured'])   && $product ['is_featured'] =="Yes") checked="" @endif)>
                       </div>
+                      <div class="form-group">
+                        <label for="is_bestseller">Best Seller Items</label>
+                        <input type="checkbox" name="is_bestseller" id="is_bestseller" value="Yes" @if(!empty($product['is_bestseller'])   && $product ['is_bestseller'] =="Yes") checked="" @endif)>
+                      </div>
                       <button type="submit" class="btn btn-primary mr-2">Submit</button>
                       <button class="btn btn-dark">Cancel</button>
                     </form>
