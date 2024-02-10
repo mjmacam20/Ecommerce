@@ -6,7 +6,7 @@
             <div class="col-md-12 grid-margin">
                 <div class="row">
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                        <h3 class="font-weight-bold">Banners</h3>
+                        <h3 class="font-weight-bold">Home Page Banners</h3>
                     </div>
                     <div class="col-12 col-xl-4">
                         <div class="justify-content-end d-flex">
@@ -62,6 +62,15 @@
 
                     <form class="forms-sample" @if(empty($banner['id'])) action="{{url('admin/add-edit-banner') }}" @else {{url('admin/add-edit-banner/'.$banner['id']) }} @endif method="post" enctype="multipart/form-data">@csrf
                       <div class="form-group">
+
+                      <div class="form-group">
+                        <label for="link">Banner Type</label>
+                        <select class="form-control" id="type" name="type" required="">
+                          <option value="">Select</option>
+                          <option @if(!empty($banner['type']) && $banner['type']=="Slider") selected="" @endif value="Slider">Slider</option>
+                          <option @if(!empty($banner['type']) && $banner['type']=="Fix") selected="" @endif value="Fix">Fix</option>
+                        </select>
+                      </div>
 
                         <label for="admin_image">Banner Image</label>
                         <input type="file" class="form-control" id="image" name="image">    
