@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Models\Category;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -104,5 +105,11 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 });
 Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::get('/','IndexController@index');
+    //Listing or Categories Route
+    $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
+    //dd($catUrls); die;
+    foreach ($catUrls as $key => $url){
+        Route::get('/'.$url, 'ProductsController@listing');
+    }
 });
 
