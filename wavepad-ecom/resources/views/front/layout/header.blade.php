@@ -223,7 +223,7 @@ $sections = Section::sections();
                         </span>
                         <nav>
                             <div class="v-wrapper">
-                                <ul class="v-list animated fadeIn">
+                                <ul class="v-list animated fadeIn" >
                                     @foreach($sections as $section)
                                         @if(count($section['categories'])>0)
                                     <li class="js-backdrop">
