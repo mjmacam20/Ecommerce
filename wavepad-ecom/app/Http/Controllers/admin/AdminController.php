@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Admin;
 use App\Models\Vendor;
 use App\Models\Country;
