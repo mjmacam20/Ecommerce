@@ -1,4 +1,4 @@
-$(document).ready(function(){;
+$(document).ready(function(){
   
     $(".nav-item").removeClass("active");
     $(".nav-link").removeClass("active");

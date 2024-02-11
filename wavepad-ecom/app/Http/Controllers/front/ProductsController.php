@@ -17,7 +17,24 @@ class ProductsController extends Controller
         if($categoryCount>0){
             //Get Category Details
             $categoryDetails = Category::categoryDetails($url);
-            $categoryProducts = Product::with('author')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->paginate(3);
+            $categoryProducts = Product::with('author')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1);
+            
+            //check for sort
+            if(isset($_GET['sort']) && !empty($_GET['sort'])){
+                if($_GET['sort']=="product_latest"){
+                    $categoryProducts->orderby('products.id','Desc');
+                }else if($_GET['sort']=="price_lowest"){
+                    $categoryProducts->orderby('products.product_price','Asc');
+                }else if($_GET['sort']=="price_highest"){
+                    $categoryProducts->orderby('products.product_price','Desc');
+                }else if($_GET['sort']=="name_z_a"){
+                    $categoryProducts->orderby('products.product_name','Desc');
+                }else if($_GET['sort']=="name_a_z"){
+                    $categoryProducts->orderby('products.product_name','Asc');
+                }
+            }
+
+            $categoryProducts = $categoryProducts->paginate(30);
             //dd($categoryProducts);
             //echo "Categories Exists"; die;
             return view ('front.products.listing')->with(compact('categoryDetails','categoryProducts'));
@@ -25,4 +42,5 @@ class ProductsController extends Controller
             abort(404);
         }
     }
+
 }
