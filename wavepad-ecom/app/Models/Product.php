@@ -43,4 +43,17 @@ class Product extends Model
         return $discounted_price;
 
     }
+
+    public static function isProductNew($product_id){
+        // Get Last 3 Products
+        $productIds = Product::select('id')->where('status',1)->orderBy('id','Desc')->limit(3)->pluck('id');
+        $productIds = json_decode(json_encode($productIds),true);
+        //dd($productIds);
+        if(in_array($product_id,$productIds)){
+            $isProductNew = "Yes";
+        }else{
+            $isProductNew = "No";
+        }
+        return $isProductNew;
+    }
 }

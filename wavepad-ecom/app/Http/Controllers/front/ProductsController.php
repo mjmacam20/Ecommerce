@@ -17,7 +17,7 @@ class ProductsController extends Controller
         if($categoryCount>0){
             //Get Category Details
             $categoryDetails = Category::categoryDetails($url);
-            $categoryProducts = Product::with('author')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->get()->toArray();
+            $categoryProducts = Product::with('author')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->paginate(3);
             //dd($categoryProducts);
             //echo "Categories Exists"; die;
             return view ('front.products.listing')->with(compact('categoryDetails','categoryProducts'));

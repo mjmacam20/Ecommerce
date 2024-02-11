@@ -152,20 +152,24 @@
                                     </div>
                                     @endif
                             </div>
+                            <?php $isProductNew = Product::isProductNew($product['id']); ?>
+                            @if($isProductNew=="Yes")
                             <div class="tag new">
                                 <span>NEW</span>
                             </div>
+                            @endif
                         </div>
                     </div>
                     @endforeach
                 </div>
+                    <div>{{ $categoryProducts->links() }}</div>
                 <!-- if gusto ilagay description- -->
                 <!--$categoryDetails['categoryDetails']['description'] }} -->
             </div>
             <!-- Shop-Right-Wrapper /- -->
            
             <!-- Shop-Pagination -->
-            <div class="pagination-area">
+            <!-- <div class="pagination-area">
                 <div class="pagination-number">
                     <ul>
                         <li style="display: none">
@@ -195,7 +199,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div>-->
             <!-- Shop-Pagination /- -->
         </div>
     </div>
