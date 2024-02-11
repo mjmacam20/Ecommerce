@@ -1,0 +1,69 @@
+Date : 2024-02-07 10:15:15
+Directory : c:\Users\mjmac\OneDrive\Desktop\Laravel Final
+Total : 23 files,  -1334 codes, 26 comments, 1254 blanks, all -54 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| PHP        |         16 |        513 |         24 |         52 |        589 |
+| JavaScript |          3 |         14 |         -2 |          0 |         12 |
+| CSS        |          4 |     -1,861 |          4 |      1,202 |       -655 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                             |         23 |     -1,334 |         26 |      1,254 |        -54 |
+| wavepad-ecom                                                                                                                  |         23 |     -1,334 |         26 |      1,254 |        -54 |
+| wavepad-ecom\app                                                                                                              |          4 |        158 |         16 |         31 |        205 |
+| wavepad-ecom\app\Http                                                                                                         |          3 |        141 |         16 |         27 |        184 |
+| wavepad-ecom\app\Http\Controllers                                                                                             |          3 |        141 |         16 |         27 |        184 |
+| wavepad-ecom\app\Http\Controllers\admin                                                                                       |          3 |        141 |         16 |         27 |        184 |
+| wavepad-ecom\app\Models                                                                                                       |          1 |         17 |          0 |          4 |         21 |
+| wavepad-ecom\database                                                                                                         |          5 |         28 |          6 |          7 |         41 |
+| wavepad-ecom\database\migrations                                                                                              |          2 |         11 |          0 |          0 |         11 |
+| wavepad-ecom\database\seeders                                                                                                 |          3 |         17 |          6 |          7 |         30 |
+| wavepad-ecom\public                                                                                                           |          7 |     -1,847 |          2 |      1,202 |       -643 |
+| wavepad-ecom\public\admin                                                                                                     |          7 |     -1,847 |          2 |      1,202 |       -643 |
+| wavepad-ecom\public\admin\css                                                                                                 |          4 |     -1,861 |          4 |      1,202 |       -655 |
+| wavepad-ecom\public\admin\js                                                                                                  |          3 |         14 |         -2 |          0 |         12 |
+| wavepad-ecom\resources                                                                                                        |          6 |        320 |          0 |         13 |        333 |
+| wavepad-ecom\resources\views                                                                                                  |          6 |        320 |          0 |         13 |        333 |
+| wavepad-ecom\resources\views\admin                                                                                            |          6 |        320 |          0 |         13 |        333 |
+| wavepad-ecom\resources\views\admin\categories                                                                                 |          3 |        242 |          0 |          7 |        249 |
+| wavepad-ecom\resources\views\admin\layout                                                                                     |          1 |          0 |          0 |          2 |          2 |
+| wavepad-ecom\resources\views\admin\sections                                                                                   |          2 |         78 |          0 |          4 |         82 |
+| wavepad-ecom\routes                                                                                                           |          1 |          7 |          2 |          1 |         10 |
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                      | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\app\Http\Controllers\admin\AdminController.php                     | PHP        |          1 |          0 |          0 |          1 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\app\Http\Controllers\admin\CategoryController.php                  | PHP        |        110 |         15 |         21 |        146 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\app\Http\Controllers\admin\SectionController.php                   | PHP        |         30 |          1 |          6 |         37 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\app\Models\Category.php                                            | PHP        |         17 |          0 |          4 |         21 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\database\migrations\2024_02_01_162057_create_vendors.php           | PHP        |        -18 |        -10 |         -4 |        -32 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\database\migrations\2024_02_05_162955_create_categories_table.php  | PHP        |         29 |         10 |          4 |         43 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\database\seeders\AdminsTableSeeder.php                             | PHP        |          0 |          0 |          1 |          1 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\database\seeders\CategoryTableSeeder.php                           | PHP        |         17 |          5 |          5 |         27 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\database\seeders\DatabaseSeeder.php                                | PHP        |          0 |          1 |          1 |          2 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\public\admin\css\bootstrap.css                                     | CSS        |      9,050 |          7 |      1,204 |     10,261 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\public\admin\css\bootstrap.min.css                                 | CSS        |    -10,904 |         -2 |         -2 |    -10,908 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\public\admin\css\dataTables.bootstrap4.min.css                     | CSS        |        332 |          0 |          1 |        333 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\public\admin\css\dataTables.bootstrap5.min.css                     | CSS        |       -339 |         -1 |         -1 |       -341 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\public\admin\js\custom.js                                          | JavaScript |         36 |          6 |          1 |         43 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\public\admin\js\dataTables.bootstrap4.min.js                       | JavaScript |          1 |          3 |          0 |          4 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\public\admin\js\dataTables.select.min.js                           | JavaScript |        -23 |        -11 |         -1 |        -35 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\resources\views\admin\categories\add_edit_category.blade.php       | PHP        |        126 |          0 |          4 |        130 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\resources\views\admin\categories\append_categories_level.blade.php | PHP        |         16 |          0 |          0 |         16 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\resources\views\admin\categories\categories.blade.php              | PHP        |        100 |          0 |          3 |        103 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\resources\views\admin\layout\layout.blade.php                      | PHP        |          0 |          0 |          2 |          2 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\resources\views\admin\sections\add_edit_section.blade.php          | PHP        |         77 |          0 |          4 |         81 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\resources\views\admin\sections\sections.blade.php                  | PHP        |          1 |          0 |          0 |          1 |
+| c:\Users\mjmac\OneDrive\Desktop\Laravel Final\wavepad-ecom\routes\web.php                                                     | PHP        |          7 |          2 |          1 |         10 |
+| Total                                                                                                                         |            |     -1,334 |         26 |      1,254 |        -54 |
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
