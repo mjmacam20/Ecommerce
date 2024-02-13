@@ -505,7 +505,7 @@ body {
     position: relative;
     height: 52px;
     line-height: 52px;
-    background: #d90429;
+    background: #016072;
     border-radius: 8px 8px 0 0;
     color: #ffffff;
     cursor: pointer;
@@ -635,7 +635,7 @@ body {
   * List items hover effect only work on the large devices.
   */
   .v-list > li:hover > a {
-    color: #d90429; }
+    color: #016072; }
   .v-list > li:hover > .v-drop-right {
     display: block; }
   .v-list > li > button {
@@ -1434,7 +1434,7 @@ body {
 
 /* Sub-component-4 v1 */
 .tab-nav-style-1-a > .nav-item:hover > .nav-link {
-  color: #d90429; }
+  color: #016072; }
   .tab-nav-style-1-a > .nav-item:hover > .nav-link:after {
     transform: scale(1); }
 
@@ -1444,7 +1444,7 @@ body {
   color: #727272; }
   .tab-nav-style-1-a > .nav-item > .nav-link:after {
     content: "";
-    background-color: #d90429;
+    background-color: #016072;
     height: 3px;
     position: absolute;
     width: 100%;
@@ -1454,8 +1454,8 @@ body {
     transform: scale(0); }
 
 .tab-nav-style-1-a > .nav-item > .nav-link.active {
-  border-color: #d90429;
-  color: #d90429; }
+  border-color: #1A988B;
+  color: #000000; }
 
 /* Sub-component-4 v2 */
 .tab-nav-style-1-b > .nav-item > .nav-link {
@@ -1464,11 +1464,11 @@ body {
   border: 2px solid #f7f7f9;
   color: #727272; }
   .tab-nav-style-1-b > .nav-item > .nav-link:hover {
-    border-color: #d90429;
+    border-color: #1A988B;
     color: #272B34; }
 
 .tab-nav-style-1-b > .nav-item > .nav-link.active {
-  border-color: #d90429;
+  border-color: #1A988B;
   color: #272B34; }
 
 /* Sub-component-4 v3 */
