@@ -67,7 +67,7 @@
                         &nbsp; {{ $product['product_name']}}
                       </div>
                       <div class="form-group">
-                        <label for="product_code">Product Code</label>
+                        <label for="product_code">SKU</label>
                           &nbsp; {{ $product['product_code']}}
                       </div>
                       <div class="form-group">
@@ -89,7 +89,7 @@
                         <div class="field_wrapper">
                           <div>
                               <input type="text" name="size[]" placeholder="Set" style="width: 120px;" required=""/>
-                              <input type="text" name="sku[]" placeholder="Product Code" style="width: 120px;" required=""/><!-- This is SKU I change it into Product Code -->
+                              <input type="text" name="sku[]" placeholder="Sku" style="width: 120px;" required=""/><!-- This is SKU I change it into Product Code -->
                               <input type="text" name="price[]" placeholder="Price" style="width: 120px;" required=""/>
                               <input type="text" name="stock[]" placeholder="Stock" style="width: 120px;" required=""/>
                               <a href="javascript:void(0);" class="add_button" title="Add Attributes">Add</a>
@@ -111,7 +111,7 @@
                                             Set
                                         </th>
                                         <th>
-                                            Product Code <!-- This is SKU I change it into Product Code -->
+                                            SKU <!-- This is SKU I change it into Product Code -->
                                         </th>
                                         <th>
                                             Price

@@ -329,10 +329,29 @@ $(document).ready(function(){
         $(this).parent('div').remove(); //Remove field html
         x--; //Decrease field counter
     });
+    //Show Filters on selection of Category
+    //$("#category_id").on('change',function(){
+    //    var category_id = $(this).val();
+        //alert(category_id);
+     //   $.ajax({
+    //        headers: {
+   //            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //        },
+    //        type:'post',
+     //       url:'category-filters',
+     //       data:{category_id:category_id},
+      //      success:function(resp){
+    //           $(".loadFilters").html(resp.view);
+     //       }
+
+    //    });
+    //});   
+
     //$('#sections').DataTable();
     //$('#categories').DataTable();
     //$('#authors').DataTable();
     //$('#products').DataTable();
     //$('#banners').DataTable();
     //$('#filters').DataTable();
+    
 });

@@ -51,7 +51,8 @@
                     </div>
                     <!-- Toolbar Sorter 1  -->
                     <form name="sortProducts" id="sortProducts">
-                    <div class="toolbar-sorter">
+
+                    <div class="toolbar-sorter name="url" id="url"">
                         <div class="select-box-wrapper">
                             <label class="sr-only" for="sort-by">Sort By</label>
                             <select name="sort" id="sort" class="select-box">

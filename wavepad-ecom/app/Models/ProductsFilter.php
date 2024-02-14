@@ -33,4 +33,9 @@ class ProductsFilter extends Model
         }
         return $available;
     }
+
+    //public static function getSizes($url){
+    //    $categoryDetails = Category::categoryDetails($url);
+    //    echo "<pre>"; print_r($categoryDetails); die;
+    //}
 }

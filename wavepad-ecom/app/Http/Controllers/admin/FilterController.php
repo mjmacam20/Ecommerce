@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use App\Models\ProductsFilter;
 use App\Models\ProductsFiltersValue;
 use App\Models\Section;
@@ -79,7 +80,7 @@ class FilterController extends Controller
             $filter->save();
 
             //Add filter column in products table
-            DB::statement("ALTER TABLE products ADD COLUMN {$data['filter_column']} VARCHAR(255) AFTER description");
+            DB::statement("ALTER TABLE products ADD COLUMN `{$data['filter_column']}` VARCHAR(255) AFTER description");
 
             return redirect('admin/filters')->with('success_message',$message);
             
@@ -115,5 +116,14 @@ class FilterController extends Controller
         //Get Filters
         $filters = ProductsFilter::where('status',1)->get()->toArray();
         return view ('admin.filters.add_edit_filter_value')->with(compact('title','filter','filters'));
+    }
+
+    public function categoryFilters(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            //echo "<pre>"; print_r($data); die;
+            $category_id = $data['category_id'];
+            return response()->json(['view'=>(String)View::make('admin.filters.category_filters')->with(compact('category_id'))]);
+        }
     }
 }

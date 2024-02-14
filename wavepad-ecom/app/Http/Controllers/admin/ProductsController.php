@@ -11,6 +11,7 @@ use App\Models\Section;
 use App\Models\ProductsImage;
 use App\Models\Category;
 use App\Models\Author;
+use App\Models\ProductsFilter;
 use Auth;
 
 class ProductsController extends Controller
@@ -121,6 +122,17 @@ class ProductsController extends Controller
                 $product->category_id = $data['category_id'];
                 $product->author_id = $data['author_id'];
 
+                $productFilters = ProductsFilter::productFilters();
+
+                foreach ($productFilters as $filter) {
+                    $filterAvailable = ProductsFilter::filterAvailable($filter['id'], $data['category_id']); 
+                    if ($filterAvailable == "Yes") {
+                        if (isset($filter['filter_column']) && isset($data[$filter['filter_column']])) {
+                            $product->{$filter['filter_column']} = $data[$filter['filter_column']];
+                        }
+                    }
+                }
+                
                 $adminType = Auth::guard('admin')->user()->type;
                 $vendor_id = Auth::guard('admin')->user()->vendor_id;
                 $admin_id= Auth::guard('admin')->user()->id;
