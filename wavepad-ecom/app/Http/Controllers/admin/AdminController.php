@@ -139,7 +139,14 @@ class AdminController extends Controller
                     Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->update(['name'=>$data['vendor_name'],'mobile'=>$data['vendor_mobile'],'address'=>$data['vendor_address'],'city'=>$data['vendor_city'],'state'=>$data['vendor_state'],'country'=>$data['vendor_country'],'zipcode'=>$data['vendor_zipcode']]);
                     return redirect()->back()->with('success_message','Vendor details updated successfully!');
         }
-            $vendorDetails = Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+        // Checking if the value is null  Handle the case when $vendorDetails is null
+            $vendorDetails = Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first();
+            if ($vendorDetails !== null) {
+                $vendorDetailsArray = $vendorDetails->toArray();
+                
+            } else {
+           
+            }
         }
         else if($slug=="business"){
             if($request->isMethod('post')){
@@ -184,7 +191,13 @@ class AdminController extends Controller
                     VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(['shop_name'=>$data['shop_name'],'shop_mobile'=>$data['shop_mobile'],'shop_address'=>$data['shop_address'],'shop_city'=>$data['shop_city'],'shop_state'=>$data['shop_state'],'shop_country'=>$data['shop_country'],'shop_zipcode'=>$data['shop_zipcode'],'business_license_number'=>$data['business_license_number'],'gst_number'=>$data['gst_number'],'pan_number'=>$data['pan_number'],'address_proof'=>$data['address_proof'],'address_proof_image'=>$imageName]);
                     return redirect()->back()->with('success_message','Vendor details updated successfully!');
         }
-            $vendorDetails = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            $vendorDetails = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first();
+            if ($vendorDetails !== null) {
+                    $vendorDetailsArray = $vendorDetails->toArray();
+                
+                } else {
+                    
+                }
         }
         else if($slug=="bank"){
             if($request->isMethod('post')){
@@ -212,7 +225,14 @@ class AdminController extends Controller
                     VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(['account_holder_name'=>$data['account_holder_name'],'bank_name'=>$data['bank_name'],'account_number'=>$data['account_number'],'bank_ifsc_code'=>$data['bank_ifsc_code']]);
                     return redirect()->back()->with('success_message','Vendor details updated successfully!');
                 }
-                $vendorDetails = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray(); 
+                // Handle the case when $vendorDetails is null
+                $vendorDetails = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first(); 
+                if ($vendorDetails !== null) {
+                    $vendorDetailsArray = $vendorDetails->toArray();
+                
+                } else {
+                    
+                }
         }
         $countries = Country::where('status',1)->get()->toArray();
         return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails','countries'));
@@ -235,8 +255,23 @@ class AdminController extends Controller
 
             $this -> validate($request, $rules, $customMessages);
 
-            if(Auth::guard('admin')->attempt(['email'=>$data['email'],'password'=>$data['password'],'status'=>1])){
+            /*if(Auth::guard('admin')->attempt(['email'=>$data['email'],'password'=>$data['password'],'status'=>1])){
                 return redirect('admin/dashboard');
+            }
+            else{
+                return redirect()->back()->with('error_message','Invalid Email or Password');
+            }*/
+
+            if(Auth::guard('admin')->attempt(['email'=>$data['email'],'password'=>$data['password']])){
+                if(Auth::guard('admin')->user()->type=="vendor" && Auth::guard('admin')->user()->confirm=="No"){
+                    return redirect()->back()->with('error_message','Please confirm your email to activate your Vendor Account.');
+
+                }else if(Auth::guard('admin')->user()->type!="vendor" && Auth::guard('admin')->user()->status=="0"){
+                    return redirect()->back()->with('error_message','Your admin account is not active');
+
+                }else{
+                    return redirect('admin/dashboard');
+                }
             }
             else{
                 return redirect()->back()->with('error_message','Invalid Email or Password');

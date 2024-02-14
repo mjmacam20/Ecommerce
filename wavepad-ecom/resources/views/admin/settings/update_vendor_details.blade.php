@@ -71,32 +71,32 @@
                         <input type="text" class="form-control" id="vendor_name" placeholder="Name" name="vendor_name" value="{{ Auth::guard('admin')->user()->name }}"required="">
                       </div>
                       <div class="form-group">
-                        <label for="vendor_address">Address</label>
-                        <input type="text" class="form-control" id="vendor_address" placeholder="Address" name="vendor_address" value="{{ $vendorDetails['address'] }}"required="">
-                      </div>
-                      <div class="form-group">
-                        <label for="vendor_city">City</label>
-                        <input type="text" class="form-control" id="vendor_city" placeholder="City" name="vendor_city" value="{{ $vendorDetails['city'] }}"required="">
-                      </div>
-                      <div class="form-group">
-                        <label for="vendor_state">State</label>
-                        <input type="text" class="form-control" id="vendor_state" placeholder="State" name="vendor_state" value="{{ $vendorDetails['state'] }}"required="">
-                      </div>
-                      <div class="form-group">
-                        <label for="vendor_country">Country</label>
-                        <select class="form-control" id="vendor_country" name="vendor_country" style="color: #495057">
-                            <option value="">Select Country</option>
-                            @foreach($countries as $country)
-                              <option value="{{ $country['country_name'] }}"@if($country['country_name']==$vendorDetails['country']) selected @endif>
-                              {{ $country['country_name'] }}</option>
-                            @endforeach
-                        </select>
-
-                      </div>
-                      <div class="form-group">
-                        <label for="vendor_zipcode">Zipcode</label>
-                        <input type="text" class="form-control" id="vendor_zipcode" placeholder="Zipcode" name="vendor_zipcode" value="{{ $vendorDetails['zipcode'] }}" required="">
-                      </div>    
+                            <label for="vendor_address">Address</label>
+                            <input type="text" class="form-control" id="vendor_address" placeholder="Address" name="vendor_address" value="{{ $vendorDetails['address'] ?? '' }}" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="vendor_city">City</label>
+                            <input type="text" class="form-control" id="vendor_city" placeholder="City" name="vendor_city" value="{{ $vendorDetails['city'] ?? '' }}" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="vendor_state">State</label>
+                            <input type="text" class="form-control" id="vendor_state" placeholder="State" name="vendor_state" value="{{ $vendorDetails['state'] ?? '' }}" required="">
+                        </div>                     
+                          <div class="form-group">
+                              <label for="vendor_country">Country</label>
+                              <select class="form-control" id="vendor_country" name="vendor_country" style="color: #495057">
+                                  <option value="">Select Country</option>
+                                  @foreach($countries as $country)
+                                      <option value="{{ $country['country_name'] }}" @if($country['country_name']==($vendorDetails['country'] ?? '')) selected @endif>
+                                          {{ $country['country_name'] }}
+                                      </option>
+                                  @endforeach
+                              </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="vendor_zipcode">Zipcode</label>
+                            <input type="text" class="form-control" id="vendor_zipcode" placeholder="Zipcode" name="vendor_zipcode" value="{{ $vendorDetails['zipcode'] ?? '' }}" required="">
+                        </div>
                       <div class="form-group">
                         <label for="vendor_mobile">Mobile</label>
                         <input type="text" class="form-control" id="vendor_mobile" placeholder="Mobile" name="vendor_mobile" value="{{ Auth::guard('admin')->user()->mobile }}" maxlength="11" minlength="11" required="">
@@ -157,60 +157,62 @@
                       </div>
                       <div class="form-group">
                         <label for="shop_name">Shop Name</label>
-                        <input type="text" class="form-control" id="shop_name" placeholder="Shop Name" name="shop_name" value="{{ $vendorDetails['shop_name'] }}"required="">
+                        <input type="text" class="form-control" id="shop_name" placeholder="Shop Name" name="shop_name" value="{{ $vendorDetails['shop_name'] ?? ''}}"required="">
                       </div>
                       <div class="form-group">
                         <label for="shop_address">Shop Address</label>
-                        <input type="text" class="form-control" id="shop_address" placeholder="Shop Address" name="shop_address" value="{{ $vendorDetails['shop_address'] }}"required="">
+                        <input type="text" class="form-control" id="shop_address" placeholder="Shop Address" name="shop_address" value="{{ $vendorDetails['shop_address'] ?? '' }}"required="">
                       </div>
                       <div class="form-group">
                         <label for="shop_city">Shop City</label>
-                        <input type="text" class="form-control" id="shop_city" placeholder="Shop City" name="shop_city" value="{{ $vendorDetails['shop_city'] }}"required="">
+                        <input type="text" class="form-control" id="shop_city" placeholder="Shop City" name="shop_city" value="{{ $vendorDetails['shop_city'] ?? '' }}"required="">
                       </div>
                       <div class="form-group">
                         <label for="shop_state">Shop State</label>
-                        <input type="text" class="form-control" id="shop_state" placeholder="Shop State" name="shop_state" value="{{ $vendorDetails['shop_state'] }}"required="">
+                        <input type="text" class="form-control" id="shop_state" placeholder="Shop State" name="shop_state" value="{{ $vendorDetails['shop_state'] ?? '' }}"required="">
                       </div>
-                      <div class="form-group">
-                        <label for="shop_country">Shop Country</label>
-                        <select class="form-control" id="shop_country" name="shop_country" style="color: #495057">
-                            <option value="">Select Country</option>
-                            @foreach($countries as $country)
-                              <option value="{{ $country['country_name'] }}"@if($country['country_name']==$vendorDetails['shop_country']) selected @endif>
-                              {{ $country['country_name'] }}</option>
-                            @endforeach
-                        </select>
 
+                      <div class="form-group">
+                          <label for="shop_country">Shop Country</label>
+                          <select class="form-control" id="shop_country" name="shop_country" style="color: #495057">
+                              <option value="">Select Country</option>
+                              @foreach($countries as $country)
+                                  <option value="{{ $country['country_name'] }}" @if($country['country_name']==($vendorDetails['shop_country'] ?? '')) selected @endif>
+                                      {{ $country['country_name'] }}
+                                  </option>
+                              @endforeach
+                          </select>
                       </div>
+
                       <div class="form-group">
                         <label for="shop_zipcode">Shop Zipcode</label>
-                        <input type="text" class="form-control" id="shop_zipcode" placeholder="Shop Zipcode" name="shop_zipcode" value="{{ $vendorDetails['shop_zipcode'] }}" required="">
+                        <input type="text" class="form-control" id="shop_zipcode" placeholder="Shop Zipcode" name="shop_zipcode" value="{{ $vendorDetails['shop_zipcode'] ?? ''}}" required="">
                       </div>    
                       <div class="form-group">
                         <label for="shop_mobile">Shop Mobile</label>
-                        <input type="text" class="form-control" id="shop_mobile" placeholder="Mobile" name="shop_mobile" value="{{ $vendorDetails['shop_mobile'] }}" maxlength="11" minlength="11" required="">
+                        <input type="text" class="form-control" id="shop_mobile" placeholder="Mobile" name="shop_mobile" value="{{ $vendorDetails['shop_mobile'] ?? ''}}" maxlength="11" minlength="11" required="">
                       </div>
                       <div class="form-group">
                         <label for="business_license_number">Business License Number</label>
-                        <input type="text" class="form-control" id="business_license_number" placeholder="Business License Number" name="business_license_number" value="{{ $vendorDetails['business_license_number'] }}" required="">
+                        <input type="text" class="form-control" id="business_license_number" placeholder="Business License Number" name="business_license_number" value="{{ $vendorDetails['business_license_number'] ?? ''}}" required="">
                       </div>
                       <div class="form-group">
                         <label for="gst_number">TIN Number</label>
-                        <input type="text" class="form-control" id="gst_number" placeholder="TIN Number" name="gst_number" value="{{ $vendorDetails['gst_number'] }}" required="">
+                        <input type="text" class="form-control" id="gst_number" placeholder="TIN Number" name="gst_number" value="{{ $vendorDetails['gst_number'] ?? ''}}" required="">
                       </div>
                       <div class="form-group">
                         <label for="pan_number">CNS Number</label>
-                        <input type="text" class="form-control" id="pan_number" placeholder="CNS Number" name="pan_number" value="{{ $vendorDetails['pan_number'] }}" required="">
+                        <input type="text" class="form-control" id="pan_number" placeholder="CNS Number" name="pan_number" value="{{ $vendorDetails['pan_number'] ?? ''}}" required="">
                       </div>
+
                       <div class="form-group">
                         <label for="address_proof">Valid ID</label>
                         <select class="form-control" name="address_proof" id="address_proof">
-                          <option value="Passport"@if($vendorDetails['address_proof']=='Passport') selected @endif>Passport</option>
-                          <option value="Drivers License"@if($vendorDetails['address_proof']=='Drivers License') selected @endif>Drivers License</option>
-                          <option value="National ID"@if($vendorDetails['address_proof']=='National ID') selected @endif>National ID</option>
-
+                            <option value="Passport" @if(($vendorDetails['address_proof'] ?? '') == 'Passport') selected @endif>Passport</option>
+                            <option value="Drivers License" @if(($vendorDetails['address_proof'] ?? '') == 'Drivers License') selected @endif>Drivers License</option>
+                            <option value="National ID" @if(($vendorDetails['address_proof'] ?? '') == 'National ID') selected @endif>National ID</option>
                         </select>
-                      </div>
+                    </div>
                       <div class="form-group">
                         <label for="address_proof_image">Address Proof Image</label>
                         <input type="file" class="form-control" id="address_proof_image" name="address_proof_image">
@@ -219,6 +221,16 @@
                             <input type="hidden" name="current_address_proof" value="{{ $vendorDetails['address_proof_image'] }}">
                         @endif
                       </div>
+
+                      <div class="form-group">
+                          <label for="address_proof_image">Address Proof Image</label>
+                          <input type="file" class="form-control" id="address_proof_image" name="address_proof_image">
+                          @if(!empty($vendorDetails['address_proof_image']))
+                              <a target="_blank" href="{{ url('admin/images/proofs/'.$vendorDetails['address_proof_image']) }}">View Image</a>
+                              <input type="hidden" name="current_address_proof" value="{{ $vendorDetails['address_proof_image'] }}">
+                          @endif
+                      </div>
+
                       <button type="submit" class="btn btn-primary mr-2">Submit</button>
                       <button class="btn btn-dark">Cancel</button>
                     </form>
@@ -263,23 +275,23 @@
                     <form class="forms-sample" action="{{url('admin/update-vendor-details/bank') }}" method="post" enctype="multipart/form-data">@csrf
                       <div class="form-group">
                         <label>Vendor Username</label>
-                        <input class="form-control" value="{{ Auth::guard('admin')->user()->email }}" readonly="">
+                        <input class="form-control" value="{{ Auth::guard('admin')->user()->email ?? '' }}" readonly="">
                       </div>
                       <div class="form-group">
                         <label for="account_holder_name">Account Holder Name</label>
-                        <input type="text" class="form-control" id="account_holder_name" placeholder="Account Holder Name" name="account_holder_name" value="{{ $vendorDetails['account_holder_name'] }}"required="">
+                        <input type="text" class="form-control" id="account_holder_name" placeholder="Account Holder Name" name="account_holder_name" value="{{ $vendorDetails['account_holder_name'] ?? '' }}"required="">
                       </div>
                       <div class="form-group">
                         <label for="bank_name">Bank Name</label>
-                        <input type="text" class="form-control" id="bank_name" placeholder="Bank Name" name="bank_name" value="{{ $vendorDetails['bank_name'] }}"required="">
+                        <input type="text" class="form-control" id="bank_name" placeholder="Bank Name" name="bank_name" value="{{ $vendorDetails['bank_name'] ?? '' }}"required="">
                       </div>
                       <div class="form-group">
                         <label for="account_number">Account Number</label>
-                        <input type="text" class="form-control" id="account_number" placeholder="Account Number" name="account_number" value="{{ $vendorDetails['account_number'] }}"required="" minlength='12' maxlength='12'>
+                        <input type="text" class="form-control" id="account_number" placeholder="Account Number" name="account_number" value="{{ $vendorDetails['account_number'] ?? '' }}"required="" minlength='12' maxlength='12'>
                       </div>
                       <div class="form-group">
                         <label for="bank_ifsc_code">Bank Code</label>
-                        <input type="text" class="form-control" id="bank_ifsc_code" placeholder="Bank Code" name="bank_ifsc_code" value="{{ $vendorDetails['bank_ifsc_code'] }}"required="">
+                        <input type="text" class="form-control" id="bank_ifsc_code" placeholder="Bank Code" name="bank_ifsc_code" value="{{ $vendorDetails['bank_ifsc_code'] ?? '' }}"required="">
                       </div>
                       <button type="submit" class="btn btn-primary mr-2">Submit</button>
                       <button class="btn btn-dark">Cancel</button>
