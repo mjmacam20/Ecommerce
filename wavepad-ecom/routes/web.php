@@ -121,6 +121,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
         Route::get('/'.$url, 'ProductsController@listing');
     }
 
+    // Product Detail Page
+    Route::get('/product/{id}','ProductsController@detail');
+
     // Vendor Login Register
     Route::get('/vendor/login-register','VendorController@loginRegister');
     // Vendor Register 

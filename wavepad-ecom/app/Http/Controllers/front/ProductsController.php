@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\ProductsAttribute;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -41,6 +42,15 @@ class ProductsController extends Controller
         }else{
             abort(404);
         }
+    }
+    public function detail($id){
+        $productDetails = Product::with(['section','category','author','attributes'=>function($query){
+            $query->where('stock','>',0)->where('status',1);
+        },'images'])->find($id)->toArray();
+        $categoryDetails = Category::categoryDetails($productDetails['category']['url']);
+        //dd( $categoryDetails);
+        $totalStock = ProductsAttribute::where('product_id',$id)->sum('stock'); 
+        return view('front.products.detail')->with(compact('productDetails','categoryDetails','totalStock'));
     }
 
 }

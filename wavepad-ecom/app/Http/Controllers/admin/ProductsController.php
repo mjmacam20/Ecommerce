@@ -264,11 +264,11 @@ class ProductsController extends Controller
                     if($skuCount>0){
                         return redirect()->back()->with('error_message','Product Code already exists! Please add another Product Code!');
                     }
-                    //set duplication check
-                    $sizeCount = ProductsAttribute::where(['product_id'=>$id],'size',$data['size'][$key])->count();
-                    if($sizeCount>0){
-                        return redirect()->back()->with('error_message','Set already exists! Please add another Set!');
-                    }
+                    //Size duplication check
+                    //$sizeCount = ProductsAttribute::where(['product_id'=>$id],'size',$data['size'][$key])->count();
+                    //if($sizeCount>0){
+                    //    return redirect()->back()->with('error_message','Size already exists! Please add another Size!');
+                    //}
 
                     $attribute = new ProductsAttribute;
                     $attribute->product_id = $id;
