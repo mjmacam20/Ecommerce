@@ -179,7 +179,7 @@
                         <select class="form-control" id="shop_country" name="shop_country" style="color: #495057">
                             <option value="">Select Country</option>
                             @foreach($countries as $country)
-                                <option value="{{ $country['country_name'] }}" @if($country['country_name']==($vendorDetails['shop_country'] ?? '')) selected @endif>
+                                <option value="{{ $country['country_name'] }}" @if(isset($vendorDetails['shop_country']) && $country['country_name'] == $vendorDetails['shop_country']) selected @endif>
                                     {{ $country['country_name'] }}
                                 </option>
                             @endforeach
@@ -206,13 +206,14 @@
                         <label for="pan_number">CNS Number</label>
                         <input type="text" class="form-control" id="pan_number" placeholder="CNS Number" name="pan_number" @if(isset($vendorDetails['pan_number'])) value="{{ $vendorDetails['pan_number'] }}" required="" @endif>
                       </div>
+                      
 
                       <div class="form-group">
                         <label for="address_proof">Valid ID</label>
                         <select class="form-control" name="address_proof" id="address_proof">
-                            <option value="Passport" @if(($vendorDetails['address_proof'] ?? '') == 'Passport') selected @endif>Passport</option>
-                            <option value="Drivers License" @if(($vendorDetails['address_proof'] ?? '') == 'Drivers License') selected @endif>Drivers License</option>
-                            <option value="National ID" @if(($vendorDetails['address_proof'] ?? '') == 'National ID') selected @endif>National ID</option>
+                            <option value="Passport" @if(isset($vendorDetails['address_proof']) && $vendorDetails ['address_proof']=="Passport") selected @endif>Passport</option>
+                            <option value="Drivers License" @if(isset($vendorDetails['address_proof']) && $vendorDetails ['address_proof']=="Drivers License") selected @endif>Drivers License</option>
+                            <option value="National ID" @if(isset($vendorDetails['address_proof']) && $vendorDetails ['address_proof']=="National ID") selected @endif>National ID</option>
                         </select>
                     </div>
                       <div class="form-group">
