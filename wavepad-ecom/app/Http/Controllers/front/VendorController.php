@@ -61,7 +61,7 @@ class VendorController extends Controller
             $vendor->updated_at = date("Y-m-d H:i:s");
             $vendor->save();
 
-            $vendor_id = DB::getPdo()->lastInsertId();
+            $vendor_id = $vendor->id;
 
             //Insert the vendor details in admins table
             $admin = new Admin;

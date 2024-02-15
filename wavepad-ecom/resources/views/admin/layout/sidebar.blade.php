@@ -22,6 +22,19 @@
                 </ul>
             </div>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-catalogue" aria-expanded="false" aria-controls="ui-catalogue">
+            <i class="icon-layout menu-icon"></i>
+            <span class="menu-title">Product Listing</span>
+            <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-catalogue">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('admin/products') }}">Products</a></li>
+                </ul>
+            </div>
+        </li>
         @else
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-settings" aria-expanded="false" aria-controls="ui-settings">

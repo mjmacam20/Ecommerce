@@ -7,10 +7,8 @@ if(isset($product['category_id'])){
 
 @foreach($productFilters as $filter)
     @if(isset($category_id))
-
     <?php 
-    $filterAvailable = ProductsFilter::filterAvailable($filter['id'],$category_id); 
-    ?>
+    $filterAvailable = ProductsFilter::filterAvailable($filter['id'],$category_id); ?>
         @if($filterAvailable=="Yes")
 
         <div class="form-group">

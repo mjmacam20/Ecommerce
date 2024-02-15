@@ -56,7 +56,6 @@ class FilterController extends Controller
     }
 
     public function addEditFilter(Request $request, $id=null){
-        Session::put('page','filters');
         if(empty($id)){
             $title = "Add Filter Columns";
             $filter = new ProductsFilter;
@@ -90,7 +89,7 @@ class FilterController extends Controller
     }
 
     public function addEditFilterValue(Request $request, $id=null){
-        Session::put('page','filters');
+    
         if(empty($id)){
             $title = "Add Filter Value";
             $filter = new ProductsFiltersValue;

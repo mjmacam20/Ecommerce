@@ -51,24 +51,24 @@
                     <div class="login-wrapper">
                         <h2 class="account-h2 u-s-m-b-20">Login</h2>
                         <h6 class="account-h6 u-s-m-b-30">Welcome back! Sign in to your account.</h6>
-                        <form>
+                        <form action="{{ url('admin/login') }}" method="post">@csrf
                             <div class="u-s-m-b-30">
-                                <label for="user-name-email">Username or Email
+                                <label for="vendor-email">Email
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-name-email" class="text-field" placeholder="Username / Email">
+                                <input type="email" name="email" id="vendor-email" class="text-field" placeholder="Enter your Email">
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="login-password">Password
+                                <label for="vendor-password">Password
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="login-password" class="text-field" placeholder="Password">
+                                <input  type="password" name="password" id="vendor-password" class="text-field" placeholder="Password">
                             </div>
                             <div class="group-inline u-s-m-b-30">
-                                <div class="group-1">
+                                <!--<div class="group-1">
                                     <input type="checkbox" class="check-box" id="remember-me-token">
                                     <label class="label-text" for="remember-me-token">Remember me</label>
-                                </div>
+                                </div>-->
                                 <div class="group-2 text-right">
                                     <div class="page-anchor">
                                         <a href="lost-password.html">
