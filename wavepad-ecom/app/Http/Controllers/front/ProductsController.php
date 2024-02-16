@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Vendor;
+use App\Models\Cart;
 use App\Models\Category;
 use Session;
 use DB;
@@ -99,5 +100,33 @@ class ProductsController extends Controller
         }
     }
 
+    public function cartAdd(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            //echo "<pre>"; print_r($data); die;
+
+            // Check kung may avail pa na stock or wala.
+            $getProductStock = ProductsAttribute::getProductStock($data['product_id'],$data['size']);
+            if($getProductStock<$data['quantity']){
+                return redirect()->back()->with('error_message','Required Quantity is not available!');
+            }
+            // Generate Session Id if not exists
+            $session_id = Session::get('session_id');
+            if(empty($session_id)){
+                $session_id = Session::getId();
+                Session::put('session_id',$session_id);
+            }
+
+            // Save Product in carts table
+            $item = new Cart;
+            $item->session_id = $session_id;
+            $item->product_id = $data['product_id'];
+            $item->size = $data['size'];
+            $item->quantity = $data['quantity'];
+            $item->save();
+
+            return redirect()->back()->with('success_message','Product has been added in Cart.');
+        }
+    }
     
 }

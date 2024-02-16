@@ -31,6 +31,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">{{ $title }}</h4>
+                    
                       @if(Session::has('error_message'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                           <strong>Error: </strong> {{ Session::get('error_message')}}
