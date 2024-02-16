@@ -120,9 +120,13 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     foreach ($catUrls as $key => $url){
         Route::get('/'.$url, 'ProductsController@listing');
     }
-
+    //Vendor Page
+    Route::get('/products/{vendorid}','ProductsController@vendorListing');
     // Product Detail Page
     Route::get('/product/{id}','ProductsController@detail');
+
+     // Get product attribute price
+     Route::post('get-product-price','ProductsController@getProductPrice');
 
     // Vendor Login Register
     Route::get('/vendor/login-register','VendorController@loginRegister');

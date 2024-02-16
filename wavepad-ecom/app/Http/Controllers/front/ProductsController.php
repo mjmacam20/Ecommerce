@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Vendor;
 use App\Models\Category;
+use Session;
+use DB;
 
 class ProductsController extends Controller
 {
@@ -43,14 +46,58 @@ class ProductsController extends Controller
             abort(404);
         }
     }
+
+    public function vendorListing($vendorid){
+        //Get Vendor Shop Name
+       $getVendorShop = Vendor::getVendorShop($vendorid);
+       // Get Vendor Products
+       $vendorProducts = Product::with('author')->where('vendor_id',$vendorid)->where('status',1);
+       $vendorProducts = $vendorProducts->paginate(30);
+       return view('front.products.vendor_listing')->with(compact('getVendorShop','vendorProducts'));
+    }
     public function detail($id){
         $productDetails = Product::with(['section','category','author','attributes'=>function($query){
             $query->where('stock','>',0)->where('status',1);
-        },'images'])->find($id)->toArray();
+        },'images','vendor'])->find($id)->toArray();
         $categoryDetails = Category::categoryDetails($productDetails['category']['url']);
-        //dd( $categoryDetails);
+        //dd($productDetails);
+
+        //get similar products
+        $similarProducts = Product::with('author')->where('category_id',$productDetails['category']['id'])->where('id','!=',$id)->limit(10)->inRandomOrder()->get()->toArray();
+        //dd($similarProducts);
+
+        // Set ka ng session sa recently viewed products
+        if(empty(Session::get('session_id'))){
+            $session_id = md5(uniqid(rand(), true));
+        }else{
+            $session_id = Session::get('session_id');
+        }
+
+        Session::put('session_id',$session_id);
+
+        // Insert ka ng products sa table if not hindi pa nag eexists 
+        $countRecentlyViewedProducts = DB::table('recently_viewed_products')->where(['product_id'=>$id,'session_id'=>$session_id])->count();
+        if($countRecentlyViewedProducts==0){
+            DB::table('recently_viewed_products')->insert(['product_id'=>$id,'session_id'=>$session_id]);
+        }
+        // Get Recently Viewed Products IDs
+        $recentProductIds = DB::table('recently_viewed_products')->select('product_id')->where('product_id','!=',$id)->where('session_id',$session_id)->inRandomOrder()->get()->take(10)->pluck('product_id');
+
+         // Get Recently Viewed Products
+        $recentlyViewedProducts = Product::with('author')->whereIn('id', $recentProductIds)->get()->toArray();
+
         $totalStock = ProductsAttribute::where('product_id',$id)->sum('stock'); 
-        return view('front.products.detail')->with(compact('productDetails','categoryDetails','totalStock'));
+        return view('front.products.detail')->with(compact('productDetails','categoryDetails','totalStock','similarProducts','recentlyViewedProducts'));
     }
 
+    public function getProductPrice(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            //echo "<pre>"; print_r($data); die;
+            $getDiscountAttributePrice = Product::getDiscountAttributePrice($data['product_id'],$data['size']);
+            return $getDiscountAttributePrice;
+        }
+    }
+
+    
 }
