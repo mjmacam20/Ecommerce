@@ -12,6 +12,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use Session;
 use DB;
+use Auth;
 
 class ProductsController extends Controller
 {
@@ -117,9 +118,21 @@ class ProductsController extends Controller
                 Session::put('session_id',$session_id);
             }
 
+            //Check products if already exists in the user cart
+            if(Auth::check()){
+                // User is logged in
+                $user_id = Auth::user()->id;
+                $countProducts = Cart::where(['product_id'=>$data['product_id'],'size'=>$data['size'],'user_id'=>$user_id])->count();
+            }else{
+                $user_id = 0;
+                // User is not logged in
+                $countProducts = Cart::where(['product_id'=>$data['product_id'],'size'=>$data['size'],'session_id'=>$session_id])->count();
+            }
+
             // Save Product in carts table
             $item = new Cart;
             $item->session_id = $session_id;
+            $item->user_id = $user_id;
             $item->product_id = $data['product_id'];
             $item->size = $data['size'];
             $item->quantity = $data['quantity'];
@@ -127,6 +140,10 @@ class ProductsController extends Controller
 
             return redirect()->back()->with('success_message','Product has been added in Cart.');
         }
+    }
+
+    public function cart(){
+        return view('front.products.cart');
     }
     
 }

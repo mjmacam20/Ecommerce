@@ -137,5 +137,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
 
     // Add to Cart
     Route::post('cart/add','ProductsController@cartAdd');
+
+    // Cart Route
+    Route::get('/cart','ProductsController@cart');
 });
 
