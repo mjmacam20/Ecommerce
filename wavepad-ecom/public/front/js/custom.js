@@ -26,7 +26,7 @@ $(document).ready(function(){
 		});
 	});
 
-	// Update Cart Quantity
+	// Update Cart Item Quantity
 	$(document).on('click','.updateCartItem',function(){
 		if($(this).hasClass('plus-a')){
 			//Get quantity
@@ -65,6 +65,29 @@ $(document).ready(function(){
 				alert("Error");
 			}
 		});
+	});
+
+	// Delete Cart Items 
+	$(document).on('click','.deleteCartitem',function(){
+		var cartid = $(this).data('cartid');
+		var result = confirm("Are you sure to delete this Cart Item?");
+		if(result){
+			$.ajax({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				data:{cartid:cartid},
+				url:'/cart/delete',
+				type:'post',
+				success:function(resp){
+	
+					$("#appendCartItems").html(resp.view);
+				},error:function(){
+					alert("Error");
+				}
+	
+			})
+		}
 	});
 
 });

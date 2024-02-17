@@ -140,5 +140,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::get('cart','ProductsController@cart');
     // Update Cart Item Quantity
     Route::post('cart/update','ProductsController@cartUpdate');
+    // Delete Cart Item Quantity
+    Route::post('cart/delete','ProductsController@cartDelete');
 });
 

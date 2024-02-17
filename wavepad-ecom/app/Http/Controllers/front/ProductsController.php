@@ -190,5 +190,17 @@ class ProductsController extends Controller
             ]);
         }
     }
+
+    public function cartDelete(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            /*echo "<pre>"; print_r($data); die;*/
+            Cart::where('id',$data['cartid'])->delete();
+            $getCartItems = Cart::getCartItems();
+            return response()->json([
+                'view'=>(String)View::make('front.products.cart_items')->with(compact('getCartItems'))
+            ]);
+        }
+    }
     
 }
