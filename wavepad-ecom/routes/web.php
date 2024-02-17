@@ -126,7 +126,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::get('/product/{id}','ProductsController@detail');
 
      // Get product attribute price
-     Route::post('get-product-price','ProductsController@getProductPrice');
+    Route::post('get-product-price','ProductsController@getProductPrice');
 
     // Vendor Login Register
     Route::get('/vendor/login-register','VendorController@loginRegister');
@@ -134,11 +134,11 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::post('vendor/register','VendorController@vendorRegister');
     // Confirm Vendor Account
     Route::get('vendor/confirm/{code}','VendorController@confirmVendor');
-
     // Add to Cart
     Route::post('cart/add','ProductsController@cartAdd');
-
     // Cart Route
-    Route::get('/cart','ProductsController@cart');
+    Route::get('cart','ProductsController@cart');
+    // Update Cart Item Quantity
+    Route::post('cart/update','ProductsController@cartUpdate');
 });
 
