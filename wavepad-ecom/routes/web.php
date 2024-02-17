@@ -130,17 +130,35 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
 
     // Vendor Login Register
     Route::get('/vendor/login-register','VendorController@loginRegister');
+
     // Vendor Register 
     Route::post('vendor/register','VendorController@vendorRegister');
+
     // Confirm Vendor Account
     Route::get('vendor/confirm/{code}','VendorController@confirmVendor');
+
     // Add to Cart
     Route::post('cart/add','ProductsController@cartAdd');
+
     // Cart Route
     Route::get('cart','ProductsController@cart');
+
     // Update Cart Item Quantity
     Route::post('cart/update','ProductsController@cartUpdate');
+
     // Delete Cart Item Quantity
     Route::post('cart/delete','ProductsController@cartDelete');
+
+    // User Login/Register
+    Route::get('/user/login-register','UserController@loginRegister');
+
+    // User Register
+    Route::post('user/register','UserController@userRegister');
+
+    // User Login
+    Route::post('user/login','UserController@userLogin');
+
+    // User Logout
+    Route::get('user/logout','UserController@userLogout');
 });
 

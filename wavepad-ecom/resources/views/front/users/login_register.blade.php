@@ -51,18 +51,21 @@
                     <div class="login-wrapper">
                         <h2 class="account-h2 u-s-m-b-20">Login</h2>
                         <h6 class="account-h6 u-s-m-b-30">Welcome back! Sign in to your account.</h6>
-                        <form action="{{ url('admin/login') }}" method="post">@csrf
+                        <p id="login-error"></p>
+                        <form id="loginForm" action="javascript:;" method="post">@csrf
                             <div class="u-s-m-b-30">
-                                <label for="vendor-email">Email
+                                <label for="user-email">Email
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="email" name="email" id="vendor-email" class="text-field" placeholder="Enter your Email">
+                                <input type="email" name="email" id="users-email" class="text-field" placeholder="Enter your Email">
+                                <p id="login-email"></p>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="vendor-password">Password
+                                <label for="user-password">Password
                                     <span class="astk">*</span>
                                 </label>
-                                <input  type="password" name="password" id="vendor-password" class="text-field" placeholder="Password">
+                                <input  type="password" name="password" id="users-password" class="text-field" placeholder="Password">
+                                <p id="login-password"></p>
                             </div>
                             <div class="group-inline u-s-m-b-30">
                                 <!--<div class="group-1">
@@ -86,41 +89,47 @@
                 <!-- Register -->
                 <div class="col-lg-6">
                     <div class="reg-wrapper">
-                        <h2 class="account-h2 u-s-m-b-20">Vendor Register</h2>
+                        <h2 class="account-h2 u-s-m-b-20">Register</h2>
                         <h6 class="account-h6 u-s-m-b-30">Registering for this site allows you to access your order status and history.</h6>
-                        <form id="vendorForm" action="{{ url('/vendor/register') }}" method="post">@csrf
+                        <form id="registerForm" action="javascript:;" method="post">@csrf
                             <div class="u-s-m-b-30">
-                                <label for="vendorname">Name
+                                <label for="username">Name
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="vendorname" name="name" class="text-field" placeholder="Vendor Name">
+                                <input type="text" id="user-name" name="name" class="text-field" placeholder="Name">
+                                <p id="register-name"></p>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="vendormobile">Mobile
+                                <label for="usermobile">Mobile
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="vendormobile" name="mobile" class="text-field" placeholder="Vendor Mobile"  minlength="11" maxlength="11">
+                                <input type="text" id="user-mobile" name="mobile" class="text-field" placeholder="Mobile"  minlength="11" maxlength="11">
+                                <p id="register-mobile"></p>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="vendoremail">Email
+                                <label for="useremail">Email
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="email" id="vendoremail" name="email" class="text-field" placeholder="Vendor Email">
+                                <input type="email" id="user-email" name="email" class="text-field" placeholder="Email">
+                                <p id="register-email"></p>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="vendorpassword">Password
+                                <label for="userpassword">Password
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="password" id="vendorpassword" name="password" class="text-field" placeholder="Vendor Password">
-                            </div>
+                                <input type="password" id="user-password" name="password" class="text-field" placeholder="Password">
+                                <p id="register-password"></p>
+                            </div>                      
+                            
                             <div class="u-s-m-b-30">
                                 <input type="checkbox" class="check-box" id="accept" name="accept">
                                 <label class="label-text no-color" for="accept">I’ve read and accept the
                                     <a href="terms-and-conditions.html" class="u-c-brand">Terms & Conditions</a>
                                 </label>
+                                <p id="register-accept"></p>
                             </div>
                             <div class="u-s-m-b-45">
-                                <button class="button button-primary w-100">Register</button>
+                                <button class="button button-primary w-100" >Register</button>
                             </div>
                         </form>
                     </div>

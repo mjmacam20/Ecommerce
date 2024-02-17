@@ -90,6 +90,71 @@ $(document).ready(function(){
 		}
 	});
 
+	// Register Form Validation
+	$("#registerForm").submit(function(){
+		var formdata = $(this).serialize();
+		$.ajax({
+			
+			url:"/user/register",
+			type:"POST",
+			data:formdata,
+			success:function(resp){
+				if(resp.type=="error"){
+					$.each(resp.errors,function(i,error){
+						$("#register-"+i).attr('style','color:red');
+						$("#register-"+i).html(error);
+			
+					setTimeout(function(){
+						$("#register-"+i).css({
+							'display':'none'
+						});
+					},3000);
+				});	
+				}else if(resp.type=="success"){
+					window.location.href = resp.url;
+				}			
+			},error:function(){
+				alert("Error");
+			}
+		})
+	});	
+
+	// Login Form Validation
+	$("#loginForm").submit(function(){
+		var formdata = $(this).serialize();
+		$.ajax({
+			
+			url:"/user/login",
+			type:"POST",
+			data:formdata,
+			success:function(resp){
+				if(resp.type=="error"){
+					$.each(resp.errors,function(i,error){
+						$("#login-"+i).attr('style','color:red');
+						$("#login-"+i).html(error);
+			
+					setTimeout(function(){
+						$("#login-"+i).css({
+							'display':'none'
+						});
+					},3000);
+				});	
+				}else if(resp.type=="incorrect"){
+					$("#login-error	").attr('style','color:red');
+					$("#login-error	").html(resp.message);
+				}else if(resp.type=="inactive"){
+					$("#login-error	").attr('style','color:red');
+					$("#login-error	").html(resp.message);
+				}else if(resp.type=="success"){
+					window.location.href = resp.url;
+				}		
+							
+			},error:function(){
+				alert("Error");
+			}
+		})
+	});	
+
 });
 
 
